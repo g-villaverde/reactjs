@@ -1,25 +1,17 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { ItemListContainer } from './components/ItemListContainer';
+import { NavBar } from './components/NavBar';
 
-function App() {
+
+export const App = () => {
+  const saludo = "Bienvenidos!";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Mi primer app con REACT JS.
-        </p>
-        <a
-          className="App-link"
-          href="https://github.com/g-villaverde/reactjs"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Github Repo
-        </a>
-      </header>
+    <div>
+      <NavBar /> 
+      <ItemListContainer saludo={saludo} />
     </div>
-  );
+
+  )
 }
 
-export default App;
+
