@@ -1,17 +1,43 @@
-import React from 'react';
-import { ItemListContainer } from './components/ItemListContainer';
-import { NavBar } from './components/NavBar';
+import React,{useState} from 'react';
+import {NavBar} from './header/NavBar';
+//import {ItemListContainer} from './List/ItemListContainer';
 
 
-export const App = () => {
-  const saludo = "Bienvenidos!";
+
+export default function App() {
+
+
+  // Handlers 
+  const [numero, setNumero] = useState(0);
+  const handleIncrement = () => {
+      setNumero(numero + 1);
+  }
+  const handleDecrement = () => {
+    setNumero(numero - 1);
+  }
+
+
+
   return (
-    <div>
-      <NavBar /> 
-      <ItemListContainer saludo={saludo} />
+
+    <div className="App">
+      <header className="App-header"><NavBar />
+      </header>
+      <main>
+        <p>{numero}</p>
+        <button onClick={handleIncrement}>+1</button>
+        <button onClick={handleDecrement}>-1</button>
+        
+
+        
+
+      </main>
     </div>
 
-  )
+    
+  );
 }
+
+
 
 
