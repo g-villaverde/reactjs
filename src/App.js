@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {NavBar} from './header/NavBar';
-//import {ItemListContainer} from './List/ItemListContainer';
+import ItemListContainer from './List/ItemListContainer';
 
 
 
@@ -26,10 +26,9 @@ export default function App() {
       <main>
         <p>{numero}</p>
         <button onClick={handleIncrement}>+1</button>
-        <button onClick={handleDecrement}>-1</button>
-        
-
-        
+        <button onClick={handleDecrement}>-1</button> 
+        <ItemListContainer />
+               
 
       </main>
     </div>

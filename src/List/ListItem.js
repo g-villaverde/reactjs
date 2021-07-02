@@ -1,13 +1,18 @@
-import React, {useEffect, useState} from 'react';
 
+import Item from "./Item";
 
-/*export const ListItem = () => {
+const ListItem = (props) => {
+  const passingItem = props.itemList;
 
-  const [productos, setProductos] = useState([])
+  return (
+    <ul>
+      {passingItem.map((dataItem) => (
+        <Item key={dataItem.id} value={dataItem.product}/>
+      )  )}
+    </ul>
+  )
 
-  promiseList().then((data) => {
-    const productoFiltrado = data.filter((producto) => producto.id > 4)
-    setProductos(productoFiltrado)
-}); 
+ 
+  }
 
-}*/
+export default ListItem;
