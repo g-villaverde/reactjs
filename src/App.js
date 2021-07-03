@@ -1,41 +1,36 @@
-import React,{useState} from 'react';
-import {NavBar} from './header/NavBar';
-import ItemListContainer from './List/ItemListContainer';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import NavBar from './components/header/NavBar';
+import ItemCount from './components/List/ItemCount';
+import ItemDetailContainer from './components/detail/ItemDetailContainer';
 
 
 
-export default function App() {
-
-
-  // Handlers 
-  const [numero, setNumero] = useState(0);
-  const handleIncrement = () => {
-      setNumero(numero + 1);
-  }
-  const handleDecrement = () => {
-    setNumero(numero - 1);
-  }
-
+function App() {
 
 
   return (
-
-    <div className="App">
-      <header className="App-header"><NavBar />
-      </header>
-      <main>
-        <p>{numero}</p>
-        <button onClick={handleIncrement}>+1</button>
-        <button onClick={handleDecrement}>-1</button> 
-        <ItemListContainer />
-               
-
-      </main>
-    </div>
+    <BrowserRouter>
+    
+    <NavBar />
+    <Switch>
+        <Route exact path="/">
+          <ItemCount />
+        </Route>
+        <Route path="/category/:category">
+          <ItemCount />
+        </Route>
+        <Route path="/item/:id">
+          <ItemDetailContainer />
+        </Route>
+    </Switch>
+    </BrowserRouter>
+    
 
     
   );
 }
+
+export default App;
 
 
 
