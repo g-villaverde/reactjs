@@ -1,8 +1,15 @@
 import React from 'react'
+import { useCartContext } from '../context/CartContext';
 import './detail.css'
+import ItemCount from './ItemCount';
 
 export const ItemDetail = (props) => {
-    console.log(props)
+
+    const {cart, addToCart} = useCartContext();
+    const onAdd = qty => {
+        addToCart(props, qty)
+    }
+    console.log(cart)
     
     return (
         <>
@@ -17,6 +24,7 @@ export const ItemDetail = (props) => {
                     
             </div>
             
+            <ItemCount onAdd={onAdd} stock={props.stock} />
 
         </div>
         </>
