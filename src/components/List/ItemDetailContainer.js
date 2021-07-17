@@ -1,27 +1,29 @@
 
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router';
-import ItemDetail from './ItemDetail'
+import ItemDetail from './ItemDetail';
+import {itemsCollection} from '../firebase';
 
 const ItemDetailContainer = () => {
 
     const {id} = useParams();
-    const [producto, setProducto] = useState();
+    const [item, setItem] = useState();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-      (async () => {
-        const { data: productos } = await axios.get("https://fakestoreapi.com/products")
-        const foundProduct = productos.find(producto=>producto.id === +id);
-        setProducto(foundProduct)
-      })();
-  
-    }, [id]);
+      (async ()=> {
+        const response = await itemsCollection.doc(id).get();
+        setItem({ id: response.id, ...response.data()});
+        setLoading(false);
+      })()
+    
+      }, [id]);
  
+
+    if (loading || !item) return <p className="h2">Loading</p>
+      
     return (
-        <div>
-            <ItemDetail {... producto} />
-        </div>
+        <ItemDetail product={item} />
     )
 
 }

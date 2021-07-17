@@ -10,35 +10,53 @@ export const CartProvider = ({children}) => {
 
 
     const [cart, setCart] = useState([]);
-    const [database, setDatabase] = useState([]);
+    const [productsInCart, setProductsInCart] = useState(0);
+    const [providerLoading, setProviderLoading] = useState(true);
+
+    
+    const inCart = id => cart.some(item => item.id === id);
 
     const clearCart = () => setCart([]);
-    const inCart = id => cart.some(item => item.id === id);
+
     const addToCart = (item, quantity) => {
         if (inCart(item.id)){
-            const newCart = cart.map( cartItem => { 
-                if(cartItem === item.id){
-                    return {... cartItem, quantity: cartItem.quantity + quantity }
-                }else return cartItem;
+            const newCart = cart.map( cartElement => { 
+                if(cartElement === item.id){
+                    return {...cartElement, quantity: cartElement.quantity + quantity }
+                }else return cartElement;
             })
-            setCart([]);
+            setCart(newCart);
         }else {
             
-            setCart(prev => [... prev, {item, quantity}])
-        }
+            setCart(prev => [...prev, {...item, quantity}])
+        }  
 
     }
 
-    useEffect(() => {
-        (async () => {
-          const { data } = await axios.get("https://fakestoreapi.com/products")
-         
-          setDatabase(data)
-        })();
-    
-      }, []);
+    const realStock = product => {
+        const foundItem = cart.find(e => e.id === product.id);
+        return foundItem ? product.stock - foundItem.quantity : product.stock;
+    }
 
-    return <CartContext.Provider value={{cart, setCart, addToCart, clearCart, database}}>
+
+    useEffect(() => {
+        const localCart = localStorage.getItem('cart');
+        if (!localCart) localStorage.setItem('cart', JSON.stringify([]));
+        else setCart(JSON.parse(localCart));
+        setProviderLoading(false);
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem('cart', JSON.stringify(cart));
+        const inCart = cart.reduce((acc, item) => {
+            return acc + item.quantity;
+        }, 0);
+        setProductsInCart(inCart);
+    }, [cart] );
+
+   
+
+    return <CartContext.Provider value={{cart, setCart, addToCart, clearCart, providerLoading, productsInCart, realStock}}>
         {children}
     </CartContext.Provider>
 }

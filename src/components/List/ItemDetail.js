@@ -3,31 +3,35 @@ import { useCartContext } from '../context/CartContext';
 import './detail.css'
 import ItemCount from './ItemCount';
 
-export const ItemDetail = (props) => {
+export const ItemDetail = ({ product }) => {
 
-    const {cart, addToCart} = useCartContext();
+    const {addToCart, realStock} = useCartContext();
+    const stock = realStock(product);
+    
     const onAdd = qty => {
-        addToCart(props, qty)
+        addToCart(product, qty)
     }
-    console.log(cart)
+    
     
     return (
-        <>
+
         <div className="card p-5">
-            <div className="d-flex justify-content-center"><img src={props.image} alt="" className="foto-thumbnail"/></div>
+            <div className="d-flex justify-content-center"><img src={product.image} alt="" className="foto-thumbnail"/></div>
             
             <div className="card-body text-center m-5 p-5">
-                    <h5 className="card-title">{props.title}</h5>
-                    <h5 className="card-title">Precio: ${props.price}</h5>
-                    <p className="card-text">{props.description}</p>
-                    <p className="card-text">Categoría: {props.category}</p>
+                    <h5 className="card-title">{product.title}</h5>
+                    <h5 className="card-title">Precio: ${product.price}</h5>
+                    {stock > 0 ? <> <h3>Stock:{stock}</h3> 
+                    <ItemCount onAdd={onAdd} stock={stock} />
+                    </> : <h3>Sin Stock</h3>}
+                    <p className="card-text">{product.description}</p>
+                    <p className="card-text">Categoría: {product.category}</p>
                     
-            </div>
             
-            <ItemCount onAdd={onAdd} stock={props.stock} />
+            
+                    </div>
+                    </div>
 
-        </div>
-        </>
       
     )
 }
