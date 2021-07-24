@@ -1,6 +1,8 @@
 import React from 'react';
 import {Redirect} from 'react-router-dom';
 import { useCartContext } from './context/CartContext';
+import FormComponent from './firebase/FormComponents';
+
 
 const Cart = () => {
     const { cart, clearCart, providerLoading} = useCartContext();
@@ -15,6 +17,7 @@ const Cart = () => {
             ))}
             <h2>Total: ${cart.reduce((acc,  {quantity, price} ) => acc + quantity * price, 0).toFixed(2)}</h2>
             <button onClick={clearCart}> Vaciar Carrito </button>
+            <FormComponent />
         </div>
     )
 
