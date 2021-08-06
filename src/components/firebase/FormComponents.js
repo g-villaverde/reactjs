@@ -1,38 +1,49 @@
+import { useState } from "react";
 import React from 'react';
+import {Redirect} from 'react-router-dom';
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { useCartContext } from '../context/CartContext';
 
 
-const FormComponent = () => {
+const FormComponent = ({checkoutCarrito}) => {
+
+  const {clearCart} = useCartContext();
 
     const initialState = {
         email:'',
         nombre:'',
-        telefono:''
+        apellido:''
     }
 
-    const {values, setValues} = useState(initialState);
+    const [values, setValues] = useState(initialState);
 
     const handleOnChange = (e) => {
-        const {name, value} = e.target;
-        setValues({...values, [name]: value });
+      //console.log(e.target.name, e.target.value)  
+      const {name, value} = e.target;
+      setValues({ ...values, [name]: value })
+
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
+        e.preventDefault(); 
+        setValues( {...initialState });
+        clearCart();
+        checkoutCarrito(values);
+        alert("Gracias por su compra");
     };
 
 
     return <Form onSubmit={handleSubmit}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>
-    <Form.Control type="email" placeholder="Enter email" name="email" onChange={handleOnChange} value={values.email}/>
+    <Form.Control type="email" placeholder="Email" name="email" onChange={handleOnChange} value={values.email}/>
     <Form.Label>Nombre</Form.Label>
-    <Form.Control type="name" placeholder="Enter name" name="name" onChange={handleOnChange} value={values.name}/>
-    <Form.Label>Telefono</Form.Label>
-    <Form.Control type="phone" placeholder="Enter phone" name="phone" onChange={handleOnChange} value={values.phone}/>
+    <Form.Control type="nombre" placeholder="Nombre" name="nombre" onChange={handleOnChange} value={values.nombre}/>
+    <Form.Label>Apellido</Form.Label>
+    <Form.Control type="apellido" placeholder="Apellido" name="apellido" onChange={handleOnChange} value={values.apellido}/>
   </Form.Group>
-  <Button variant="primary" type="submit">
-    Submit
-  </Button>
+    <Button variant="primary" type="submit">Checkout</Button>
 </Form>
 }
 

@@ -1,0 +1,17 @@
+.description {
+    width: 600px;
+    height: auto;
+    padding-bottom: 2vh;
+    text-align: justify;
+}
+
+.border-wrap {
+    border: 1px solid #0d6efd;
+}
+.border-sides {
+    border-left: 1px solid #0d6efd;
+    border-right: 1px solid #0d6efd;
+}
+.border-bottom {
+    border-bottom: 1px solid #0d6efd;
+}

@@ -1,5 +1,14 @@
 
 .foto-thumbnail{
-    width: 200px;
+    width: 400px;
     height: auto;
+}
+
+.titulos {
+    font-size: 1rem;
+    font-family: Helvetica, sans-serif;
+    font-weight: bold;
+    text-decoration: none;
+    color: black;
+    text-align: center;
 }

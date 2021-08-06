@@ -1,17 +1,16 @@
-import axios from "axios";
-import { createContext, createElement, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 export const CartContext = createContext({});
 
 
-export const useCartContext = () => useContext(CartContext);
+export const useCartContext = () => useContext(CartContext);    // Contexto
 
-export const CartProvider = ({children}) => {
+export const CartProvider = ({children}) => {               //Provider
 
 
-    const [cart, setCart] = useState([]);
-    const [productsInCart, setProductsInCart] = useState(0);
-    const [providerLoading, setProviderLoading] = useState(true);
+    const [cart, setCart] = useState([]);                                   // Set del carrito
+    const [productsInCart, setProductsInCart] = useState(0);                // Cantidad de Productos en el carrito
+    const [providerLoading, setProviderLoading] = useState(true);           // Loading del Carrito
 
     
     const inCart = id => cart.some(item => item.id === id);

@@ -4,6 +4,8 @@ import NavBar from './components/header/NavBar';
 import ItemDetailContainer from './components/List/ItemDetailContainer';
 import ItemListContainer from './components/List/ItemListContainer';
 import { CartProvider } from './components/context/CartContext';
+import Cart from './components/Cart';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
@@ -29,9 +31,10 @@ function App() {
               <ItemDetailContainer />
             </Route>
             <Route path="/cart">
+              <Cart />
             </Route>
         </Switch>
-        </BrowserRouter>
+    </BrowserRouter>
 
 </CartProvider>
     

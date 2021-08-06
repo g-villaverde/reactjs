@@ -26,8 +26,7 @@ const NavBar = () => {
  
   <select onChange={handleChange} className="btn btn-primary">
     <option value="" className="">Todas las categorias</option>
-    <option value="men's clothing">Ropa Hombre</option>
-    <option value="jewelery">Joyas</option>
+    <option value="hombre">Ropa Hombre</option>
     <option value="electronics">Electronica</option>
   </select>
     
