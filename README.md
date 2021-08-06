@@ -1,7 +1,15 @@
 
+Store.com es una tienda de ecommerce.
+Elegí bootstrap para el UI porque vengo trabajando con el toolkit desde que empecé el curso de Desarrollo Web.
+Además es el que mejor manejo y hace que la construcción de estilos sea más rápida y fluida. 
+
+
 Neltifly
 https://app.netlify.com/sites/blissful-darwin-986cc7/overview
 
+
+
+****************************************************************************************************
 
 # Getting Started with Create React App
 
